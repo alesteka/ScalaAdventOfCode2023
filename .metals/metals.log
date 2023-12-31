@@ -2455,3 +2455,4 @@ java.util.concurrent.RejectedExecutionException: Task Future(<not completed>) re
 Dec 31, 2023 11:40:01 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
 INFO: Unsupported notification method: $/setTrace
 2023.12.31 23:44:30 INFO  time: code lens generation in 5.83s
+2023.12.31 23:50:42 WARN  no build target for: /home/ales/Desktop/scala/proj/src/main/scala/Main.scala
