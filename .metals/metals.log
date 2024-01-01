@@ -2683,3 +2683,7 @@ WARNING: Unmatched cancel notification for request id 7813
 2024.01.01 14:17:41 WARN  no build target for: /home/ales/Desktop/scala/proj/src/main/scala/Main.scala
 Jan 01, 2024 2:17:45 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
 INFO: Unsupported notification method: $/setTrace
+Jan 01, 2024 2:20:46 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 7968
+2024.01.01 14:21:00 WARN  no build target for: /home/ales/Desktop/scala/proj/src/main/scala/Main.scala
+2024.01.01 14:21:59 WARN  no build target for: /home/ales/Desktop/scala/proj/src/main/scala/Main.scala

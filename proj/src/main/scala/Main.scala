@@ -22,7 +22,6 @@ object Advent2023 {
     //println(a)
     println(puzzle.map(listEl => secondPart(listEl.toString)).sum)
     
-    
   }
   
   def secondPart(s: String = "Game 96: 1 blue, 1 green, 1 red; 3 blue, 1 green, 5 red; 2 blue, 8 red, 10 green"): Int = {
@@ -39,8 +38,6 @@ object Advent2023 {
   
     values = values + (gameNumber.last -> value.last)
     
-    
-
     for (i <- values.values) {
       var colorValues = Map.empty[String, ArrayBuffer[Int]]
       var sl = i.replace(";", ",")   
@@ -56,19 +53,15 @@ object Advent2023 {
           case "green" => colorValues = colorValues + (color -> (greenValues += numberOfCubes))
           case _ =>
         }
-
       }      
-
       var sumV = colorValues.values.map(_.max).toList
       finalValues = multiply(sumV)      
       return finalValues
 
     }
     return finalValues
-
-
-
   }
+
   def multiply(li: List[Int]) :Int = {
     var sum: Int = 1
     for (i <- li) {
@@ -76,57 +69,52 @@ object Advent2023 {
     }
     return sum
   }
-  //def firstPart(s: String): Int = {
-  //  //var lines = scala.io.Source.fromFile("../Data/puzle.txt").mkString
-  //  //var s : String = "Game 96: 1 blue, 1 green, 1 red; 3 blue, 1 green, 5 red; 2 blue, 8 red, 10 green"
-  //  var values = Map.empty[String, String]
-  //  var game = s split ':' take 1
-  //  var gameNumber = game.head split ' ' take 2
-  //  var value = s split ':' take 2
-  //  var finalValues = Map.empty[Int, ArrayBuffer[Int]]
-  //  var arr = new ArrayBuffer[Int]
-  //  values = values + (gameNumber.last -> value.last)
-  //  var check :Int = 0
-  //  for (i <- values.values) {
-  //    var sl = i.replace(";", ",")   
-  //    var sp = sl split ','
-  //    for (j <- sp) {
-  //      
-  //      var sp_color = j split " " take 3
-  //      var sp_color_ = sp_color.toList.last.toString        
-  //      var sp_value = j split " " take 2
-  //      var sp_value_ = sp_value.toList.last.trim.toInt
-  //      val z = sp_color_ match {
-  //        case "blue" => if (sp_value_ > 14)  {check = 1} else { check = 0}
-  //        case "green" => if (sp_value_ > 13) {check = 1} else { check = 0}
-  //        case "red" => if (sp_value_ > 12) {check = 1} else { check = 0}
-  //        case _ => 
-  //      }
-  //      arr += check
-  //      //println(arr)
-  //    }
-  //  }
-  //  
-  //  finalValues = finalValues + (gameNumber.last.toInt -> arr)
-  //  
-  //  for ((i, j) <- finalValues){
-  //    if ((j contains 0 )&& (j contains 1) ) {
-  //      return 0
-  //    } else {return i.toInt}
-  //  }
-  //  return 0
-  //}
 
-  def convert(): Unit = {
-    var s = "51591twosix4dhsxvgghxq\t425nine"
+  def firstPart(s: String): Int = {
+    //var lines = scala.io.Source.fromFile("../Data/puzle.txt").mkString
+    //var s : String = "Game 96: 1 blue, 1 green, 1 red; 3 blue, 1 green, 5 red; 2 blue, 8 red, 10 green"
+    var values = Map.empty[String, String]
+    var game = s split ':' take 1
+    var gameNumber = game.head split ' ' take 2
+    var value = s split ':' take 2
+    var finalValues = Map.empty[Int, ArrayBuffer[Int]]
+    var arr = new ArrayBuffer[Int]
+    values = values + (gameNumber.last -> value.last)
+    var check :Int = 0
+    for (i <- values.values) {
+      var sl = i.replace(";", ",")   
+      var sp = sl split ','
+      for (j <- sp) {
+        
+        var sp_color = j split " " take 3
+        var sp_color_ = sp_color.toList.last.toString        
+        var sp_value = j split " " take 2
+        var sp_value_ = sp_value.toList.last.trim.toInt
+        val z = sp_color_ match {
+          case "blue" => if (sp_value_ > 14)  {check = 1} else { check = 0}
+          case "green" => if (sp_value_ > 13) {check = 1} else { check = 0}
+          case "red" => if (sp_value_ > 12) {check = 1} else { check = 0}
+          case _ => 
+        }
+        arr += check
+        //println(arr)
+      }
+    }
     
+    finalValues = finalValues + (gameNumber.last.toInt -> arr)
+    
+    for ((i, j) <- finalValues){
+      if ((j contains 0 )&& (j contains 1) ) {
+        return 0
+      } else {return i.toInt}
+    }
+    return 0
   }
 
   def getNumber(lines: String): Unit = {
     
     var finalBuffer = ArrayBuffer[String]()
     val arrBuffer = ArrayBuffer[String]()
-
 //    var f: String = "0"
 
       for (c <- lines) {
@@ -156,7 +144,5 @@ object Advent2023 {
     i += 1
     }
     println(sum)
-
   }
-
 }
