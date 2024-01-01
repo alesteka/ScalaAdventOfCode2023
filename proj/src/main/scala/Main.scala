@@ -17,64 +17,105 @@ object Advent2023 {
     //lines = lines + "\t"
     //println(getNumber(lines))
     var puzzle = scala.io.Source.fromFile("../Data/puzle.txt").getLines.toList
-    Thread.sleep(1000)
-    var a = puzzle.map(listEl => second(listEl.toString)).sum
-    println(a)
+    //Thread.sleep(1000)
+    //var a = puzzle.map(listEl => firstPart(listEl.toString)).sum
+    //println(a)
+    println(puzzle.map(listEl => secondPart(listEl.toString)).sum)
+    
     
   }
-
-
-  def second(s: String): Int = {
+  
+  def secondPart(s: String = "Game 96: 1 blue, 1 green, 1 red; 3 blue, 1 green, 5 red; 2 blue, 8 red, 10 green"): Int = {
     //var lines = scala.io.Source.fromFile("../Data/puzle.txt").mkString
     //var s : String = "Game 96: 1 blue, 1 green, 1 red; 3 blue, 1 green, 5 red; 2 blue, 8 red, 10 green"
-    
-    
-
-
     var values = Map.empty[String, String]
+    var blueValues = ArrayBuffer[Int]()
+    var redValues = ArrayBuffer[Int]()
+    var greenValues = ArrayBuffer[Int]()
+    var finalValues :Int = 0
     var game = s split ':' take 1
     var gameNumber = game.head split ' ' take 2
     var value = s split ':' take 2
-    var finalValues = Map.empty[Int, ArrayBuffer[Int]]git s
-    var arr = new ArrayBuffer[Int]
+  
     values = values + (gameNumber.last -> value.last)
-    //println(values)
-    var check :Int = 0
+    
+    
 
     for (i <- values.values) {
+      var colorValues = Map.empty[String, ArrayBuffer[Int]]
       var sl = i.replace(";", ",")   
       var sp = sl split ','
-
+      //println(sp.toList)
       for (j <- sp) {
-        
-        var sp_color = j split " " take 3
-        var sp_color_ = sp_color.toList.last.toString        
-        var sp_value = j split " " take 2
-        var sp_value_ = sp_value.toList.last.trim.toInt
-
-        val z = sp_color_ match {
-          case "blue" => if (sp_value_ > 14)  {check = 1} else { check = 0}
-          case "green" => if (sp_value_ > 13) {check = 1} else { check = 0}
-          case "red" => if (sp_value_ > 12) {check = 1} else { check = 0}
-          case _ => 
-          
+        var splitJ = j split ' '
+        var color = splitJ(2).trim.toString
+        var numberOfCubes = splitJ(1).trim.toInt
+        color match {
+          case "blue" => colorValues = colorValues + (color -> (blueValues += numberOfCubes))
+          case "red" => colorValues = colorValues + (color -> (redValues += numberOfCubes))
+          case "green" => colorValues = colorValues + (color -> (greenValues += numberOfCubes))
+          case _ =>
         }
-        arr += check
-        //println(arr)
-      }
+
+      }      
+
+      var sumV = colorValues.values.map(_.max).toList
+      finalValues = multiply(sumV)      
+      return finalValues
 
     }
-    
-    finalValues = finalValues + (gameNumber.last.toInt -> arr)
-    
-    for ((i, j) <- finalValues){
-      if ((j contains 0 )&& (j contains 1) ) {
-        return 0
-      } else {return i.toInt}
-    }
-    return 0
+    return finalValues
+
+
 
   }
+  def multiply(li: List[Int]) :Int = {
+    var sum: Int = 1
+    for (i <- li) {
+      sum = sum * i.toInt
+    }
+    return sum
+  }
+  //def firstPart(s: String): Int = {
+  //  //var lines = scala.io.Source.fromFile("../Data/puzle.txt").mkString
+  //  //var s : String = "Game 96: 1 blue, 1 green, 1 red; 3 blue, 1 green, 5 red; 2 blue, 8 red, 10 green"
+  //  var values = Map.empty[String, String]
+  //  var game = s split ':' take 1
+  //  var gameNumber = game.head split ' ' take 2
+  //  var value = s split ':' take 2
+  //  var finalValues = Map.empty[Int, ArrayBuffer[Int]]
+  //  var arr = new ArrayBuffer[Int]
+  //  values = values + (gameNumber.last -> value.last)
+  //  var check :Int = 0
+  //  for (i <- values.values) {
+  //    var sl = i.replace(";", ",")   
+  //    var sp = sl split ','
+  //    for (j <- sp) {
+  //      
+  //      var sp_color = j split " " take 3
+  //      var sp_color_ = sp_color.toList.last.toString        
+  //      var sp_value = j split " " take 2
+  //      var sp_value_ = sp_value.toList.last.trim.toInt
+  //      val z = sp_color_ match {
+  //        case "blue" => if (sp_value_ > 14)  {check = 1} else { check = 0}
+  //        case "green" => if (sp_value_ > 13) {check = 1} else { check = 0}
+  //        case "red" => if (sp_value_ > 12) {check = 1} else { check = 0}
+  //        case _ => 
+  //      }
+  //      arr += check
+  //      //println(arr)
+  //    }
+  //  }
+  //  
+  //  finalValues = finalValues + (gameNumber.last.toInt -> arr)
+  //  
+  //  for ((i, j) <- finalValues){
+  //    if ((j contains 0 )&& (j contains 1) ) {
+  //      return 0
+  //    } else {return i.toInt}
+  //  }
+  //  return 0
+  //}
 
   def convert(): Unit = {
     var s = "51591twosix4dhsxvgghxq\t425nine"
